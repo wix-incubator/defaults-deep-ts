@@ -1,0 +1,27 @@
+{
+  "name": "defaults-deep-ts",
+  "version": "0.0.1",
+  "description": "_.defaultsDeep with proper typescript typing",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "tsd __typings-tests__"
+  },
+  "keywords": [
+    "defaultsDeep",
+    "merge",
+    "typescript",
+    "ts"
+  ],
+  "author": "Andy Kogut <mail@andykog.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash.defaultsdeep": "^4.6.6",
+    "tsd": "^0.11.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "lodash.defaultsdeep": "^4.6.1"
+  }
+}
