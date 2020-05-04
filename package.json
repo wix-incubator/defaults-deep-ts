@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "repository": "https://github.com/wix-incubator/defaults-deep-ts",
   "scripts": {
-    "prepublish": "npm run build",
+    "release": "node scripts/release",
     "build": "tsc",
     "test": "tsd __typings-tests__"
   },
@@ -19,6 +19,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/lodash.defaultsdeep": "^4.6.6",
+    "semver": "^7.3.2",
+    "shell-utils": "^1.0.10",
     "tsd": "^0.11.0",
     "typescript": "^3.8.3"
   },
