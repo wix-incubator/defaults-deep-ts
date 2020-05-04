@@ -1,6 +1,6 @@
 {
   "name": "defaults-deep-ts",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "_.defaultsDeep with proper typescript typing",
   "main": "dist/index.js",
   "scripts": {

@@ -7,7 +7,7 @@ Install
 -------
 
 ```
-npm install defaultsdeep
+npm install defaults-deep-ts
 ```
 
 Usage
@@ -26,8 +26,8 @@ const data: SomeData = {};
 const id: string = data.order!.id!;
 
 // Let's provide some defaults:
-import defaultsDeep from 'defaultsdeep'
-const dataWithDefaults = withDefaults(data, {order: {id: ''}});
+import defaultsDeep from 'defaults-deep-ts'
+const dataWithDefaults = defaultsDeep(data, {order: {id: ''}});
 
 // Now `order` and `id` are not optional bacause you provided defaults for them:
 const id: string = dataWithDefaults.order.id;
