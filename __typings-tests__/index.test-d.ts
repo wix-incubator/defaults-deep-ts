@@ -1,4 +1,4 @@
-import {expectType} from 'tsd';
+import {expectType, expectError} from 'tsd';
 
 import defaultsDeep from '../src';
 
@@ -43,5 +43,15 @@ expectType<{a: {b: string}[]}>(defaultsDeep({} as {a?: {b: string}[]}, {a: []}))
 expectType<{a: {b: string[] | undefined}}>(defaultsDeep({} as {a?: {b?: string[]}}, {a: {}}));
 expectType<{a: {b: string[]}}>(defaultsDeep({} as {a?: {b: string[]}}, {a: {b: ['']}}));
 
-// Doesn't work unfortunately:
-// expectType<{a: 1}>(defaultsDeep({} as {a?: 1}, {a: 1}));
+// Date
+expectType<{a: Date | undefined}>(defaultsDeep({} as {a?: Date}, {}));
+expectType<{a: Date}>(defaultsDeep({} as {a?: Date}, {a: new Date()}));
+
+// Custom class
+class MyClass {};
+expectType<{a: MyClass | undefined}>(defaultsDeep({} as {a?: MyClass}, {}));
+// TODO: doesn't work
+expectError<{a: MyClass}>(defaultsDeep({} as {a?: MyClass}, {a: new MyClass()}));
+
+// TODO: doesn't work
+expectError<{a: 1}>(defaultsDeep({} as {a?: 1}, {a: 1}));

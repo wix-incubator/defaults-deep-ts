@@ -1,8 +1,9 @@
 {
   "name": "defaults-deep-ts",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "_.defaultsDeep with proper typescript typing",
   "main": "dist/index.js",
+  "repository": "https://github.com/wix-incubator/defaults-deep-ts",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
@@ -15,7 +16,7 @@
     "ts"
   ],
   "author": "Andy Kogut <mail@andykog.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/lodash.defaultsdeep": "^4.6.6",
     "tsd": "^0.11.0",
