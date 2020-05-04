@@ -3,14 +3,11 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist/",
-    "sourceMap": true,
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "UMD",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
-    "jsx": "react",
-    "lib": ["dom", "esnext"],
+    "target": "ESNext",
     "strict": true
   },
   "include": ["./src/**/*.ts"]

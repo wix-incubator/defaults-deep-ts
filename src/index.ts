@@ -12,16 +12,16 @@ type Converted<T> = {
     T[P]
 };
 
-type DefaultsDeep<T, U extends Partial<T>> = Converted<{
+type DefaultsDeep<T, U extends Partial<T>> = {
   [P in keyof T]-?:
     U[P] extends Partial<T[P]> ?
-      null extends U[P] ? DefaultsDeep<T[P], U[P]> :
-      NonNullable<DefaultsDeep<T[P], U[P]>> :
+      null extends U[P] ? Converted<DefaultsDeep<T[P], U[P]>> :
+      Converted<NonNullable<DefaultsDeep<T[P], U[P]>>> :
     T[P] extends object ? T[P] | null :
     undefined extends T[P] ? T[P] | Undef :
     T[P]
-}>;
+};
 /* tslint:enable prettier */
 
-export default <T, U>(object: T, defaults: U): DefaultsDeep<T, U> =>
+export default <T, U>(object: T, defaults: U): Converted<DefaultsDeep<T, U>> =>
   lodashDefaultsDeep(object, defaults);
