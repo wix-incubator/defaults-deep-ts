@@ -15,4 +15,7 @@ branches:
     - master
 
 deploy:
-  - npm run release
+  - provider: script
+    script: npm run release
+    on:
+      branch: master
