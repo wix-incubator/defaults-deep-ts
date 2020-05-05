@@ -9,6 +9,7 @@ install:
 
 script:
   - npm run test
+  - npm run build
 
 branches:
   only:
