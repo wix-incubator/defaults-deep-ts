@@ -7,7 +7,6 @@
     "noImplicitAny": true,
     "module": "CommonJS",
     "moduleResolution": "node",
-    "importHelpers": true,
     "target": "es5",
     "strict": true
   },

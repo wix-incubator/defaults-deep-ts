@@ -47,6 +47,14 @@ expectType<{a: {b: string[]}}>(defaultsDeep({} as {a?: {b: string[]}}, {a: {b: [
 expectType<{a: Date | undefined}>(defaultsDeep({} as {a?: Date}, {}));
 expectType<{a: Date}>(defaultsDeep({} as {a?: Date}, {a: new Date()}));
 
+// Optional types in defaults
+expectType<{a: string | undefined}>(defaultsDeep({} as {a?: string}, {} as {a?: string}));
+expectType<{a: string | null}>(defaultsDeep({} as {a: string | null}, {} as {a: string | null}));
+expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | undefined}, {} as {a: string | null}));
+expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | undefined}, {} as {a: string | null | undefined}));
+expectType<{a: string | undefined}>(defaultsDeep({} as {a?: string | null}, {} as {a?: string}));
+expectType<{a: string | undefined | null}>(defaultsDeep({} as {a?: string | null}, {} as {a?: string | null}));
+
 // Custom class
 class MyClass {};
 expectType<{a: MyClass | undefined}>(defaultsDeep({} as {a?: MyClass}, {}));
@@ -55,3 +63,4 @@ expectError<{a: MyClass}>(defaultsDeep({} as {a?: MyClass}, {a: new MyClass()}))
 
 // TODO: doesn't work
 expectError<{a: 1}>(defaultsDeep({} as {a?: 1}, {a: 1}));
+
