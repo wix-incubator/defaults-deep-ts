@@ -55,12 +55,19 @@ expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | undefined}, 
 expectType<{a: string | undefined}>(defaultsDeep({} as {a?: string | null}, {} as {a?: string}));
 expectType<{a: string | undefined | null}>(defaultsDeep({} as {a?: string | null}, {} as {a?: string | null}));
 
+// Reguired inside optionals in defaults
+expectType<{a: {b: string} | undefined}>(defaultsDeep({} as {a?: {b?: string}}, {} as {a?: {b: string}}));
+expectType<{a: {b: {c: string}} | null}>(defaultsDeep({} as {a: {b: {c: string | null}} | null}, {} as {a: {b: {c: string}} | null}));
+expectType<{a: {b: {c: string}} | undefined}>(defaultsDeep({} as {a?: {b?: {c?: string}}}, {} as {a?: {b: {c: string}}}));
+expectType<{a: {b: {c: string}} | undefined | null}>(defaultsDeep({} as {a?: {b?: {c?: string | null} | null} | null}, {} as {a?: {b: {c: string}} | null}));
+
 // Custom class
 class MyClass {};
 expectType<{a: MyClass | undefined}>(defaultsDeep({} as {a?: MyClass}, {}));
 // TODO: doesn't work
 expectError<{a: MyClass}>(defaultsDeep({} as {a?: MyClass}, {a: new MyClass()}));
 
-// TODO: doesn't work
-expectError<{a: 1}>(defaultsDeep({} as {a?: 1}, {a: 1}));
+// Concrete values
+expectType<{a: 1 | undefined}>(defaultsDeep({} as {a?: 1}, {}));
+expectType<{a: 1}>(defaultsDeep({} as {a?: 1}, {a: 1}));
 

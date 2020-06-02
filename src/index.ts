@@ -16,11 +16,12 @@ type DefaultsDeep<T, U extends Partial<T>> = {
     U[P] extends Date ? T[P] :
     U[P] extends Partial<T[P]> ?
       null extends U[P] ?
-        undefined extends U[P] ? Converted<DefaultsDeep<T[P], U[P]>> | Undef :
-        Converted<DefaultsDeep<T[P], U[P]>> :
-      undefined extends U[P] ? Converted<NonNullable<DefaultsDeep<T[P], U[P]>>> | Undef :
-      Converted<NonNullable<DefaultsDeep<T[P], U[P]>>> :
-    undefined extends T[P] ? T[P] | Undef :
+        undefined extends U[P] ? Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> | Undef :
+        Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> :
+      undefined extends U[P] ? Converted<NonNullable<DefaultsDeep<T[P], NonNullable<U[P]>>>> | Undef :
+      Converted<NonNullable<DefaultsDeep<T[P], NonNullable<U[P]>>>> :
+    undefined extends U[P] ?
+      undefined extends T[P] ? T[P] | Undef : T[P] :
     T[P]
 };
 
