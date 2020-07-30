@@ -50,8 +50,8 @@ expectType<{a: Date}>(defaultsDeep({} as {a?: Date}, {a: new Date()}));
 // Optional types in defaults
 expectType<{a: string | undefined}>(defaultsDeep({} as {a?: string}, {} as {a?: string}));
 expectType<{a: string | null}>(defaultsDeep({} as {a: string | null}, {} as {a: string | null}));
-expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | undefined}, {} as {a: string | null}));
-expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | undefined}, {} as {a: string | null | undefined}));
+expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | undefined}, {} as {a: string | undefined}));
+expectType<{a: string | undefined}>(defaultsDeep({} as {a: string | null | undefined}, {} as {a: string | undefined}));
 expectType<{a: string | undefined}>(defaultsDeep({} as {a?: string | null}, {} as {a?: string}));
 expectType<{a: string | undefined | null}>(defaultsDeep({} as {a?: string | null}, {} as {a?: string | null}));
 

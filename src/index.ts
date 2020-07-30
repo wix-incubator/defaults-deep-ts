@@ -25,5 +25,5 @@ type DefaultsDeep<T, U extends Partial<T>> = {
     T[P]
 };
 
-export default <T, U>(object: T, defaults: U): Converted<DefaultsDeep<T, U>> =>
+export default <T, U extends Partial<T>>(object: T, defaults: U): Converted<DefaultsDeep<T, U>> =>
   lodashDefaultsDeep(object, defaults);
