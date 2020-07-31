@@ -40,12 +40,20 @@ expectType<{a: {b: {c: number}}}>(defaultsDeep({} as {a?: {b: {c: number}}}, {a:
 // Arrays
 expectType<{a: {b: string}[] | undefined}>(defaultsDeep({} as {a?: {b: string}[]}, {}));
 expectType<{a: {b: string}[]}>(defaultsDeep({} as {a?: {b: string}[]}, {a: []}));
+// expectType<{a: {}[]}>(defaultsDeep({} as {a: {}[] | undefined}, {a: []}));
 expectType<{a: {b: string[] | undefined}}>(defaultsDeep({} as {a?: {b?: string[]}}, {a: {}}));
 expectType<{a: {b: string[]}}>(defaultsDeep({} as {a?: {b: string[]}}, {a: {b: ['']}}));
 
 // Date
 expectType<{a: Date | undefined}>(defaultsDeep({} as {a?: Date}, {}));
 expectType<{a: Date}>(defaultsDeep({} as {a?: Date}, {a: new Date()}));
+expectType<{a: Date | undefined}>(defaultsDeep({} as {d?: {a?: Date};}, {d: defaultsDeep({} as {a?: Date}, {} as {})}).d);
+expectType<{a: Date | undefined}>(defaultsDeep({} as {a?: Date}, {} as {}));
+expectType<{b: Date | null}>(defaultsDeep({} as {b: Date | null}, {} as {b: Date | null}));
+expectType<{c: Date | undefined | null}>(defaultsDeep({} as {c?: Date | null}, {} as {}));
+expectType<{b: Date | null}>(defaultsDeep({} as {b?: Date | null}, {} as {b: Date | null}));
+expectType<{b: Date | undefined}>(defaultsDeep({} as {b?: Date | null}, {} as {b: Date | undefined}));
+
 
 // Optional types in defaults
 expectType<{a: string | undefined}>(defaultsDeep({} as {a?: string}, {} as {a?: string}));
