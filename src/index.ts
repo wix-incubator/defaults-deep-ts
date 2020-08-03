@@ -1,5 +1,3 @@
-import lodashDefaultsDeep from 'lodash.defaultsdeep';
-
 type Undef = {'@Undefined$ymbol': true};
 type NonUndef<T> = T extends Undef ? never : T;
 
@@ -28,5 +26,26 @@ type DefaultsDeep<T, U extends Partial<T>> = {
     T[P]
 };
 
-export default <T, U extends Partial<T>>(object: T, defaults: U): Converted<DefaultsDeep<T, U>> =>
-  lodashDefaultsDeep(object, defaults);
+const isPlainObject = (obj: any) => Object.prototype.toString.call(obj) === '[object Object]';
+const isNil = (v: any) => v === null || v === undefined;
+
+const defaultsDeep = <T, U extends Partial<T>>(object: T, defaults: U): Converted<DefaultsDeep<T, U>> => {
+  const result: any = object;
+  for (let p in defaults) {
+    if (!Object.prototype.hasOwnProperty.call(defaults, p)) {
+      continue;
+    }
+    if (isNil(result[p]) && !isNil(defaults[p])) {
+      result[p] = defaults[p];
+    }
+  }
+  for (let p in result) {
+    const defaultValue = (defaults as any)[p];
+    if (isPlainObject(result[p]) && isPlainObject(defaultValue)) {
+      result[p] = defaultsDeep(result[p], defaultValue);
+    }
+  }
+  return result;
+};
+
+export default defaultsDeep;
