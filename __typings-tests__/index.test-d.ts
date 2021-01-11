@@ -79,3 +79,6 @@ expectError<{a: MyClass}>(defaultsDeep({} as {a?: MyClass}, {a: new MyClass()}))
 expectType<{a: 1 | undefined}>(defaultsDeep({} as {a?: 1}, {}));
 expectType<{a: 1}>(defaultsDeep({} as {a?: 1}, {a: 1}));
 
+// Skip required props in defaults
+expectType<{a: {a: 1, b: 2}}>(defaultsDeep({a: {b: 2}} as {a: {a?: 1, b: 2}}, {a: {a: 1}}));
+expectType<{fee: {a: string, b: string}}>(defaultsDeep({} as {fee: {a: string, b: string}}, {fee: {a: ''}}));
