@@ -3,8 +3,8 @@ defaults-deep-ts
 
 [![Build Status](https://travis-ci.com/wix-incubator/defaults-deep-ts.svg?branch=master)](https://travis-ci.com/wix-incubator/defaults-deep-ts)
 
-Similar to [\_.defaultsDeep](https://lodash.com/docs/#defaultsDeep) but with intelligent TypeScript typings
-and with some differences:
+Similar to [\_.defaultsDeep](https://lodash.com/docs/#defaultsDeep) but with some differences:
+* **Intelligent TypeScript typings**
 * Doesn't try to merge arrays
 * Doesn't allow multiple sources
 * Treats `null` as an empty value
