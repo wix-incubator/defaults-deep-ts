@@ -108,5 +108,11 @@ describe('defaultsDeep', () => {
     const actual = defaultsDeep({ 'a': ['abc'] }, { 'a': 'abc' as any });
     expect(actual.a).toEqual(['abc']);
   });
+
+  it('shouldn’t fail to compile with error TS2589', function() {
+    const z = defaultsDeep({}, {});
+
+    [z].find(_ => true);
+  });
 });
 

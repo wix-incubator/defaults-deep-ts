@@ -1,9 +1,10 @@
 type Undef = {'@Undefined$ymbol': true};
-type NonUndef<T> = T extends Undef ? never : T;
+type Undef2 = {'@Undefined2$ymbol': true};
+type NonUndef<T> = T extends Undef | Undef2 ? never : T;
 
 type Converted<T> = {
   [P in keyof T]:
-    Undef extends T[P] ? NonUndef<T[P]> | undefined :
+    Undef & Undef2 extends T[P] ? NonUndef<T[P]> | undefined :
     T[P]
 };
 
@@ -25,7 +26,7 @@ type DefaultsDeep<T, U extends DeepPartial<T>> = {
       undefined extends U[P] ? NonNullable<T[P]> | Undef : NonNullable<T[P]> :
     U[P] extends DeepPartial<T[P]> ?
       null extends U[P] ?
-        undefined extends U[P] ? Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> | Undef :
+        undefined extends U[P] ? Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> | Undef2 :
         Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> :
       undefined extends U[P] ? Converted<NonNullable<DefaultsDeep<T[P], NonNullable<U[P]>>>> | Undef :
       Converted<NonNullable<DefaultsDeep<T[P], NonNullable<U[P]>>>> :
