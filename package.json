@@ -1,6 +1,6 @@
 {
   "name": "defaults-deep-ts",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "_.defaultsDeep with proper typescript typing",
   "main": "dist/index.js",
   "repository": "https://github.com/wix-incubator/defaults-deep-ts",
@@ -23,7 +23,7 @@
     "semver": "^7.3.2",
     "shell-utils": "^1.0.10",
     "ts-jest": "^25.5.1",
-    "tsd": "^0.11.0",
+    "tsd": "^0.24.1",
     "tslib": "^2.0.0",
     "typescript": "^4.3.5"
   }

@@ -2,13 +2,16 @@ type Undef = {'@Undefined$ymbol': true};
 type Undef2 = {'@Undefined2$ymbol': true};
 type NonUndef<T> = T extends Undef | Undef2 ? never : T;
 
+// Same NonNullable which suddenly stopped working in some cases (and some tests failed)
+type NonNil<T> = T extends null | undefined ? never : T;
+
 type Converted<T> = {
   [P in keyof T]:
     Undef & Undef2 extends T[P] ? NonUndef<T[P]> | undefined :
     T[P]
 };
 
-type NonTraversable = {[Symbol.toPrimitive]: any};
+type NonTraversable = string | number | bigint | boolean | symbol | Date;
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U> ?
@@ -20,16 +23,18 @@ type DeepPartial<T> = {
 
 type DefaultsDeep<T, U extends DeepPartial<T>> = {
   [P in keyof T]-?:
-    NonNullable<T[P]> extends NonTraversable ?
+    NonNil<T[P]> extends NonTraversable ?
       null extends U[P] ?
-        undefined extends U[P] ? T[P] | Undef : T[P] :
-      undefined extends U[P] ? NonNullable<T[P]> | Undef : NonNullable<T[P]> :
+        undefined extends U[P] ?
+          undefined extends T[P] ? T[P] | Undef : T[P] :
+        T[P] :
+      undefined extends U[P] ? NonNil<T[P]> | Undef : NonNil<T[P]> :
     U[P] extends DeepPartial<T[P]> ?
       null extends U[P] ?
-        undefined extends U[P] ? Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> | Undef2 :
-        Converted<DefaultsDeep<T[P], NonNullable<U[P]>>> :
-      undefined extends U[P] ? Converted<NonNullable<DefaultsDeep<T[P], NonNullable<U[P]>>>> | Undef :
-      Converted<NonNullable<DefaultsDeep<T[P], NonNullable<U[P]>>>> :
+        undefined extends U[P] ? Converted<DefaultsDeep<T[P], NonNil<U[P]>>> | Undef2 :
+        Converted<DefaultsDeep<T[P], NonNil<U[P]>>> :
+      undefined extends U[P] ? Converted<NonNil<DefaultsDeep<T[P], NonNil<U[P]>>>> | Undef :
+      Converted<NonNil<DefaultsDeep<T[P], NonNil<U[P]>>>> :
     undefined extends U[P] ?
       undefined extends T[P] ? T[P] | Undef : T[P] :
     T[P]
